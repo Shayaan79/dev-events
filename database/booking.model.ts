@@ -64,6 +64,8 @@ BookingSchema.pre('save', async function (next) {
 // Create index on eventId for faster queries
 BookingSchema.index({ eventId: 1 });
 
+BookingSchema.index({ eventId: 1, email: 1 }, { unique: true, name: 'uniq_event_email' });
+
 // Use existing model if available (prevents OverwriteModelError in development)
 const Booking = models.Booking || model<IBooking>('Booking', BookingSchema);
 
